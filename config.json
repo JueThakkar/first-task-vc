@@ -1,0 +1,5 @@
+{
+	"hostAddress": ":8030",
+	"dbProvider": "mysql",
+	"dbConnectionString": "filedb-user:nomik4$QNVj9jgGT@/filedb?parseTime=true"
+}
