@@ -1,0 +1,182 @@
+{{template "header-main" .}}
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Course Info</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Course Info
+                </div>
+                <div class="panel-body">
+                    <div id="toolbar">
+                        <form id="FileUpForm" class="form-inline" method="post" autocomplete="off" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12" style="margin-bottom: 2%;">
+                                    <div class="form-group">
+                                        <input class="form-control" type="file" id="File" name="uploadFile"/>
+                                        <button type="submit" id="FileUpBtn" class="btn btn-success">Upload</button>
+                                        <input type="text" name="id" id="Aid" hidden/>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <table class="table table-striped table-hover" id="table" data-toggle="table" data-url="/file-data" data-side-pagination="server" data-pagination="true" data-page-list="[20, 50, 100, 200]" data-search="true" data-toolbar="#toolbar" data-query-params="queryParams"
+                        data-page-size="20" data-sort-order="asc">
+                        <thead>
+                            <tr>
+                                <th data-field="ID" data-class="u_id">ID</th>
+                                <th data-field="FilePath" data-class="text-center" data-formatter="FileFormatter">File Path</th>
+                                <th data-field="Edit" data-formatter="delFormatter" data-events="actionEvents"></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="Delete-file-modal" class="modal fade" tabindex="-4" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Delete File</h4>
+            </div>
+            <div class="modal-body">
+                <form id="formDeleteFile" method="POST">
+                    <div class="form-group">
+                        <label>Are you sure you want to delete this file?</label>
+                    </div>
+                    <input type="text" id="delcid" name="id" hidden/>
+                    <div id="FileDelError" style="display:none;margin-top: 1%;margin-bottom: 1%" class="alert alert-danger">
+                    </div>
+                    <div id="CourseSuccess" style="display:none;margin-top: 1%;margin-bottom: 1%" class="alert alert-success">
+                    </div>
+                    <button type="button" class="delFile btn btn-primary">Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="refreshApage btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Class End -->
+<link href="/static/css/bootstrap-table.min.css" rel="stylesheet" type="text/css">
+<script src="/static/js/bootstrap-table.min.js"></script>
+
+
+<script type="text/javascript">
+    function val(evt) {
+        var theEvent = evt || window.event;
+        var key = theEvent.keyCode || theEvent.which;
+        key = String.fromCharCode(key);
+        var regex = /^\d*\.?\d*$/; // added this to accept decimal also
+        if (!regex.test(key) && evt.keyCode != 8 && evt.keyCode != 9) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault) theEvent.preventDefault();
+        }
+    }
+    var $table = $('#table');
+    var tableparams = {};
+
+    // queryParams to get the value like limits search and offset value
+    function queryParams(p) {
+        var params = {};
+        for (i in p) {
+            if (p[i]) {
+                params[i] = p[i];
+            }
+        }
+
+        $('#toolbar').find('input[name]').each(function() {
+            params[$(this).attr('name')] = $(this).val();
+        });
+        tableparams = params;
+        return params;
+    }
+
+    // Edit formatter for edit, delete options
+    function delFormatter(value, row) {
+        return "<a title='Delete' href='#' class='delfile' data-toggle='modal' data-target='#Delete-file-modal'><i class='fa fa-trash-o fa-fw'></i></a>"
+    }
+
+    function FileFormatter(value, row){
+        return "<a href=/get-file/"+"Assignment/"+row.FilePath + " target=_blank>" + row.FilePath + "</a>";
+    }
+
+    // Action events for the edit and delete option
+    window.actionEvents = {
+        'click .delfile': function(e, value, row, index) {
+            // assgin input data to modal pop
+            $('#delcid').val(row.ID);
+        }
+    };
+
+    $(function() {
+        
+        $('.delFile').click(function() {
+            var id = $('#delcid').val();
+
+            $.ajax({
+                method: 'POST',
+                url: '/delete-file?id=' + id,
+                data: $(this).serialize(),
+                error: function(xhr, status, err) {},
+                success: function(result) {
+                    if (result.s.c == 1) {
+                        $('#FileDelError').show();
+                        $('#FileDelError').html(result.s.m);
+                        console.log(result);
+                        setTimeout(function() {
+                            window.location.href = "/file-upload";
+                        }, 3000);
+                    } else {
+                        $('#FileDelError').hide();
+                        window.location.href = "/file-upload";
+                    }
+                }
+            });
+        });
+       
+        
+        $("#FileUpBtn").click(function(event){
+            event.preventDefault();
+           
+            // Check for required fields...
+            $("#FileUpForm").each(function(index){
+
+            });
+
+            // Get Form
+            var form = $("#FileUpForm")[0];
+
+            var data = new FormData(form);
+
+            // Create new obj for form
+            $.ajax({
+                type:"POST",
+                enctype: 'multipart/form-data',
+                url: 'add-form-data',
+                data:data,
+                processData:false,
+                contentType:false,
+                error:function(xhr,status,err){},
+                success:function(data){}
+                    // if(data.s.c == 0){
+                    //     window.location.href = "/file-upload";
+                    // }
+                // }
+            });
+        });
+
+    });
+</script>

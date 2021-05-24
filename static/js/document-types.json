@@ -1,0 +1,20 @@
+[
+  {"v": "KYC_Form_01", "n": "KYC Form"},
+  {"v": "Photograph_02", "n": "Photograph (max size 50KB)"},
+  {"v": "PAN_03", "n": "PAN"},
+  {"v": "Aadhar_UID_04", "n": "Aadhar - UID"},
+  {"v": "Passport_05", "n": "Passport"},
+  {"v": "Driving_License_06", "n": "Driving License"},
+  {"v": "Voter_ID_Card_07", "n": "Voter ID Card"},
+  {"v": "NREGA_Job_Card_08", "n": "NREGA Job Card"},
+  {"v": "Signature_09", "n": "Signature"},
+  {"v": "SMA_Identity_Card_10", "n": "SMA - Identity Card"},
+  {"v": "SMA_Letter_11", "n": "SMA - Letter"},
+  {"v": "Utility_Bill_12", "n": "Utility Bill"},
+  {"v": "Tax_Receipt_13", "n": "Property or Municipal Tax receipt"},
+  {"v": "Account_Statement_14", "n": "Bank/Post Office Account Statement"},
+  {"v": "Pension_Payment_Order_15", "n": "Pension Payment Order"},
+  {"v": "Letter_of_Allotment_16", "n": "Letter of Allotment"},
+  {"v": "Foreign_Govt_Document_17", "n": "Foreign Embassy/Govt Document"},
+  {"v": "Other_98", "n": "Other"}
+]

@@ -1,0 +1,132 @@
+.no-records-found {
+    color: red;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+th.text-uppercase {
+  text-transform: uppercase;
+}
+
+/*hide th data */
+th.u_id {
+  display: none;
+}
+
+th.b_id {
+  display: none;
+}
+
+th.batch_id {
+  display: none;
+}
+
+th.ckycB_code {
+  display: none;
+}
+
+th.ckycR_code {
+  display: none;
+}
+
+/*hide td data */
+td.u_id {
+  display: none;
+}
+
+td.b_id {
+  display: none;
+}
+
+td.batch_id {
+  display: none;
+}
+
+td.ckycB_code {
+  display: none;
+}
+
+td.ckycR_code {
+  display: none;
+}
+
+td.text-uppercase {
+  text-transform: uppercase;
+}
+
+img {
+  max-width: 100%; /* This rule is very important, for cropper */
+}
+
+.tab-content{
+  margin-top: 10px;
+}
+
+.reqd-marker{
+  color: red;
+}
+
+@keyframes blink {
+    /**
+     * At the start of the animation the dot
+     * has an opacity of .2
+     */
+    0% {
+      opacity: .2;
+    }
+    /**
+     * At 20% the dot is fully visible and
+     * then fades out slowly
+     */
+    20% {
+      opacity: 1;
+    }
+    /**
+     * Until it reaches an opacity of .2 and
+     * the animation can start again
+     */
+    100% {
+      opacity: .2;
+    }
+}
+
+.waiting span {
+    /**
+     * Use the blink animation, which is defined above
+     */
+    animation-name: blink;
+    /**
+     * The animation should take 1.4 seconds
+     */
+    animation-duration: 1.4s;
+    /**
+     * It will repeat itself forever
+     */
+    animation-iteration-count: infinite;
+    /**
+     * This makes sure that the starting style (opacity: .2)
+     * of the animation is applied before the animation starts.
+     * Otherwise we would see a short flash or would have
+     * to set the default styling of the dots to the same
+     * as the animation. Same applies for the ending styles.
+     */
+    animation-fill-mode: both;
+}
+
+.waiting span:nth-child(2) {
+    /**
+     * Starts the animation of the third dot
+     * with a delay of .2s, otherwise all dots
+     * would animate at the same time
+     */
+    animation-delay: .2s;
+}
+
+.waiting span:nth-child(3) {
+    /**
+     * Starts the animation of the third dot
+     * with a delay of .4s, otherwise all dots
+     * would animate at the same time
+     */
+    animation-delay: .4s;
+}

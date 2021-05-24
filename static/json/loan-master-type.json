@@ -1,0 +1,49 @@
+[{
+  "v": "",
+  "n": "Select Loan Type"
+}, {
+  "v": "Car_Loan",
+  "n": "Car Loan"
+}, {
+  "v": "Cash_Credit_Loan",
+  "n": "Cash Credit Loan"
+}, {
+  "v": "Consumer_Durable_Loan",
+  "n": "Consumer Durable Loan"
+}, {
+  "v": "Education_Loan",
+  "n": "Education Loan"
+}, {
+  "v": "FD_Loan",
+  "n": "FD Loan"
+}, {
+  "v": "Gold_Loan",
+  "n": "Gold Loan"
+}, {
+  "v": "Home_Loan",
+  "n": "Home Loan"
+}, {
+  "v": "Machinery_Loan",
+  "n": "Machinery Loan"
+}, {
+  "v": "Mortgage_Loan",
+  "n": "Mortgage Loan"
+}, {
+  "v": "NSC/KVP_Loan",
+  "n": "NSC/KVP Loan"
+}, {
+  "v": "Over_Draft",
+  "n": "Over Draft"
+}, {
+  "v": "Personal_loan/Surety_Loan_for_Members",
+  "n": "Personal loan/Surety Loan for Members"
+}, {
+  "v": "Self_Employee_Loan",
+  "n": "Self Employee Loan"
+}, {
+  "v": "Tuf_Machinery_Loan",
+  "n": "Tuf Machinery Loan"
+}, {
+  "v": "Two_Wheeler_Loan",
+  "n": "Two Wheeler Loan"
+}]

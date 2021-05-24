@@ -1,0 +1,65 @@
+{{define "header-main"}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> 
+    <title>File Upload - Assignment</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="/static/css/metisMenu.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/static/css/sb-admin-2.min.css?1" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- with golang template - ie8 support scripts get added with a server variable -->
+    {{.IESupport}}
+
+    <link rel="shortcut icon" href="/static/img/favicon.ico">
+
+    <!-- jQuery -->
+    <script src="/static/js/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/static/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+                <!-- check the flag for los retail n Lead mgmt -->
+                <a class="navbar-brand" href="/"><i class="fa fa-university" aria-hidden="true"></i>&nbsp;File Upload - Assignment</a>
+            </div>
+            <!-- /.navbar-header -->
+
+            
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="/file-upload"><i class="fa fa-dashboard"></i> File Upload</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        {{end}}

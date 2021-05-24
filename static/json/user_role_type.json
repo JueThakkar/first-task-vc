@@ -1,0 +1,67 @@
+[{
+  "v": "",
+  "n": ""
+}, {
+  "v": "Admin",
+  "n": "Admin"
+}, {
+  "v": "AGM_Finance",
+  "n": "AGM Finance"
+}, {
+  "v": "AGM_Banking",
+  "n": "AGM Banking"
+}, {
+  "v": "AGM_Retail",
+  "n": "AGM Retail"
+}, {
+  "v": "Branch_Loan_Officer",
+  "n": "Branch Loan Officer"
+}, {
+  "v": "Branch_Loan_Manager",
+  "n": "Branch Loan Manager"
+}, {
+  "v": "CEO",
+  "n": "CEO"
+}, {
+  "v": "Executive_Committee_SPOC",
+  "n": "Executive Committee SPOC"
+}, {
+  "v": "Field_Officer",
+  "n": "Field Officer"
+}, {
+  "v": "General_Manager",
+  "n": "General Manager"
+}, {
+  "v": "HO_Admin",
+  "n": "HO Admin"
+}, {
+  "v": "HO_Loan_Appraisal",
+  "n": "HO Loan Appraisal"
+}, {
+  "v": "Ho_Loan_Clerk",
+  "n": "Ho Loan Clerk"
+},{
+  "v": "HO_Loan_Officer",
+  "n": "HO Loan Officer"
+}, {
+  "v": "Junior_Officer",
+  "n": "Junior Officer"
+}, {
+  "v": "Manager_Retail_Loan",
+  "n": "Manager Retail Loan"
+}, {
+  "v": "Mobile_Loan_Officer",
+  "n": "Mobile Loan Officer"
+}, {
+  "v": "Sr_Manager_Retail_Loan",
+  "n": "Sr Manager Retail Loan"
+}, {
+  "v": "Senior_Manager",
+  "n": "Senior Manager"
+}, {
+  "v": "Senior_Officer",
+  "n": "Senior Officer"
+}, {
+  "v": "Web_Loan_Officer",
+  "n": "Web Loan Officer"
+}]

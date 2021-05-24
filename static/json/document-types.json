@@ -1,0 +1,11 @@
+[
+  {"v": "Passport", "n": "Passport"},
+  {"v": "Voter_ID_Card", "n": "Voter ID Card"},
+  {"v": "PAN", "n": "PAN"},
+  {"v": "Driving_Licence", "n": "Driving Licence"},
+  {"v": "Aadhar_UID", "n": "Aadhar UID"},
+  {"v": "NREGA_Job_Card", "n": "NREGA Job Card"},
+  {"v": "Utility_Bill", "n": "Utility Bill"},
+  {"v": "Tax_Receipt", "n": "Property or Municipal Tax receipt"},
+  {"v": "Account_Statement", "n": "Bank/Post Office Account Statement"},
+]
