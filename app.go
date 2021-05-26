@@ -1,17 +1,18 @@
 package main
 
 import (
-	"JueThakkar-Assignment/config"
-	"JueThakkar-Assignment/entities"
-	"JueThakkar-Assignment/logger"
+	"first-task-vc/config"
+	"first-task-vc/entities"
+	"first-task-vc/helpers"
+	"first-task-vc/logger"
 	"io"
-	"los-retail/helpers"
 	"os"
 	"path/filepath"
 	"strconv"
 	"strings"
 
 	"bytes"
+	"encoding/csv"
 	"encoding/json"
 	"flag"
 	"html/template"
@@ -82,8 +83,12 @@ func main() {
 	r.HandleFunc("/file-data", FileData)
 	r.PathPrefix("/get-file/").HandlerFunc(GetFile)
 	r.HandleFunc("/delete-file", DeleteFile)
-	// r.HandleFunc("/course-master-data", CourseMasterData)
-	// r.HandleFunc("/add-course", AddCourse)
+
+	// File Data Reading func...
+	r.HandleFunc("/file-read", FileRead)
+	r.HandleFunc("/add-file-data-db", AddFileDataDb)
+	r.HandleFunc("/file-read-data", FileReadData)
+	r.HandleFunc("/delete-read-file", DeleteReadFile)
 
 	h := handlers.CompressHandler(r)
 
@@ -331,3 +336,138 @@ func DeleteFile(w http.ResponseWriter, r *http.Request) {
 }
 
 //....................... File Section - End .................................//
+
+func FileRead(w http.ResponseWriter, r *http.Request) {
+
+	vm := map[string]interface{}{
+		"Title": "File Data Read",
+	}
+
+	renderTemplate(w, r, "file-read.html", vm)
+}
+
+func AddFileDataDb(w http.ResponseWriter, r *http.Request) {
+	reader, err := r.MultipartReader()
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+
+	for {
+		part, err := reader.NextPart()
+
+		if err == io.EOF {
+			break
+		}
+
+		if part.FormName() == "null" {
+			continue
+		}
+
+		if part.FormName() == "uploadFile" {
+			csvReader := csv.NewReader(part)
+			records, _ := csvReader.ReadAll()
+
+			// log.Println("Recoders", reacords)
+
+			for _, row := range records[1:] {
+				r := GetRowReader(row)
+				r.Next() // Sr No.
+				fName := r.Next()
+				mName := r.Next()
+				lName := r.Next()
+				gender := r.Next()
+				category := r.Next()
+				mobile := r.Next()
+
+				var userDetailDb entities.Userdetail
+
+				db.Table("userdetails").
+					Where("mobile=? and deleted_at is null", mobile).
+					Scan(&userDetailDb)
+
+				userDetailDb.FirstName = fName
+				userDetailDb.MiddleName = mName
+				userDetailDb.LastName = lName
+				userDetailDb.Gender = gender
+				userDetailDb.Category = category
+				userDetailDb.Mobile = mobile
+
+				if int(userDetailDb.ID) > 0 {
+					db.Save(&userDetailDb)
+				} else {
+					db.Create(&userDetailDb)
+				}
+			}
+			// sendJsonResponse(w, len(records))
+			// helpers.SendSuccessResult(w, nil)
+		}
+	}
+	helpers.SendSuccessResult(w, nil)
+}
+
+func FileReadData(w http.ResponseWriter, r *http.Request) {
+	query := db.Table("userdetails").
+		Select("id,first_name,middle_name,last_name,category,gender,mobile").
+		Where("deleted_at IS NULL")
+
+	countQuery := &(*query)
+
+	var list []*entities.Userdetail
+	query.Scan(&list)
+
+	var count int
+	// countQuery := db.Table("userdetails")
+	countQuery.Count(&count)
+
+	result := struct {
+		Total int                    `json:"total"`
+		Rows  []*entities.Userdetail `json:"rows"`
+	}{
+		Total: count,
+		Rows:  list,
+	}
+
+	sendJsonResponse(w, result)
+}
+
+func DeleteReadFile(w http.ResponseWriter, r *http.Request) {
+	// read form data
+	idStr := r.FormValue("id")
+
+	id := 0
+	if idStr != "" {
+		id, _ = strconv.Atoi(idStr)
+	}
+
+	// delete from db
+	if id > 0 {
+		var e entities.Userdetail
+
+		db.Where("id=? and deleted_at IS NULL", id).Find(&e)
+
+		if e.ID > 0 {
+			db.Delete(&e)
+		}
+	}
+
+	helpers.SendSuccessResult(w, nil)
+}
+
+type RowReader struct {
+	i   int
+	row []string
+}
+
+func GetRowReader(r []string) *RowReader {
+	return &RowReader{
+		i:   0,
+		row: r,
+	}
+}
+
+func (e *RowReader) Next() (v string) {
+	v = strings.TrimSpace(e.row[e.i])
+	e.i++
+	return
+}
